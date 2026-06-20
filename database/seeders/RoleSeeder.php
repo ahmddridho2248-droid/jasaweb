@@ -8,25 +8,16 @@ use App\Models\User;
 
 class RoleSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        // Buat role Admin dan Client
-        $adminRole = Role::firstOrCreate(['name' => 'Admin']);
-        $clientRole = Role::firstOrCreate(['name' => 'Client']);
+        // Create roles
+        $superAdmin = Role::firstOrCreate(['name' => 'Super Admin', 'guard_name' => 'web']);
+        $klien = Role::firstOrCreate(['name' => 'Klien', 'guard_name' => 'web']);
 
-        // User ID 1 (Pawas) sebagai Admin
-        $adminUser = User::find(1);
-        if ($adminUser) {
-            $adminUser->assignRole($adminRole);
-        }
-
-        // Sisa user sebagai Client
-        $clients = User::where('id', '>', 1)->get();
-        foreach ($clients as $client) {
-            $client->assignRole($clientRole);
+        // Assign Super Admin role to the first user in the database if exists
+        $firstUser = User::first();
+        if ($firstUser) {
+            $firstUser->assignRole($superAdmin);
         }
     }
 }

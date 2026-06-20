@@ -20,7 +20,10 @@ class PembayaranForm
                     ->numeric(),
                 TextInput::make('metode_pembayaran')
                     ->required(),
-                TextInput::make('bukti_pembayaran')
+                \Filament\Forms\Components\FileUpload::make('bukti_pembayaran')
+                    ->acceptedFileTypes(['application/pdf', 'image/*'])
+                    ->maxSize(2048)
+                    ->directory('bukti-pembayaran')
                     ->default(null),
                 Toggle::make('apakah_diverifikasi')
                     ->required(),
