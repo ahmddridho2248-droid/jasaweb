@@ -17,7 +17,8 @@ class PembayaranForm
                 Select::make('id_pesanan')
                     ->relationship('pesanan', 'id_pesanan')
                     ->required()
-                    ->searchable(),
+                    ->searchable()
+                    ->preload(),
                 TextInput::make('jumlah_bayar')
                     ->required()
                     ->numeric()

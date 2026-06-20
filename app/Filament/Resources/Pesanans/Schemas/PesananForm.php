@@ -17,11 +17,13 @@ class PesananForm
                 Select::make('user_id')
                     ->relationship('user', 'name')
                     ->required()
-                    ->searchable(),
+                    ->searchable()
+                    ->preload(),
                 Select::make('id_paket')
                     ->relationship('paketJasa', 'nama_paket')
                     ->required()
-                    ->searchable(),
+                    ->searchable()
+                    ->preload(),
                 TextInput::make('permintaan_nama_domain')
                     ->maxLength(255)
                     ->default(null),

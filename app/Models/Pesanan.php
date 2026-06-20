@@ -20,6 +20,7 @@ class Pesanan extends Model
 
     public function paketJasa()
     {
+        // Parameter: Related Model, Foreign Key in pesanan table, Owner Key in paket_jasa table
         return $this->belongsTo(PaketJasa::class, 'id_paket', 'id_paket_jasa');
     }
 

@@ -20,6 +20,7 @@ class PaketJasa extends Model
 
     public function pesanan()
     {
+        // Parameter: Related Model, Foreign Key in pesanan table, Local Key in paket_jasa table
         return $this->hasMany(Pesanan::class, 'id_paket', 'id_paket_jasa');
     }
 }

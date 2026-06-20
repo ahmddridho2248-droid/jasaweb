@@ -16,11 +16,13 @@ class ProyekForm
                 Select::make('id_pesanan')
                     ->relationship('pesanan', 'id_pesanan')
                     ->required()
-                    ->searchable(),
+                    ->searchable()
+                    ->preload(),
                 Select::make('id_pekerja')
                     ->relationship('pekerja', 'name')
                     ->required()
-                    ->searchable(),
+                    ->searchable()
+                    ->preload(),
                 TextInput::make('tautan_repositori')
                     ->url()
                     ->maxLength(255)
