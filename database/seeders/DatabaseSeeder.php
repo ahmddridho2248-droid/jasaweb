@@ -15,11 +15,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        // Pastikan tabel users terisi default user
+        $user = User::create([
+            'name' => 'Nama User',
+            'email' => 'admin@jasaweb.com',
+            'password' => bcrypt('password'),
+            'no_hp' => '081234567890'
         ]);
+
+        // Opsional: Jalankan RoleSeeder jika ada
+        if (class_exists(RoleSeeder::class)) {
+            $this->call([
+                RoleSeeder::class,
+            ]);
+        }
     }
 }
