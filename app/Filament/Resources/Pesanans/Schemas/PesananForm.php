@@ -2,10 +2,10 @@
 
 namespace App\Filament\Resources\Pesanans\Schemas;
 
-use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\DatePicker;
 use Filament\Schemas\Schema;
 
 class PesananForm
@@ -14,28 +14,32 @@ class PesananForm
     {
         return $schema
             ->components([
-                TextInput::make('user_id')
+                Select::make('user_id')
+                    ->relationship('user', 'name')
                     ->required()
-                    ->numeric(),
-                TextInput::make('id_paket')
+                    ->searchable(),
+                Select::make('id_paket')
+                    ->relationship('paketJasa', 'nama_paket')
                     ->required()
-                    ->numeric(),
+                    ->searchable(),
                 TextInput::make('permintaan_nama_domain')
-                    ->required(),
+                    ->maxLength(255)
+                    ->default(null),
                 Textarea::make('deskripsi_kebutuhan')
                     ->required()
                     ->columnSpanFull(),
                 Select::make('status_pesanan')
                     ->options([
-            'menunggu' => 'Menunggu',
-            'diproses' => 'Diproses',
-            'selesai' => 'Selesai',
-            'dibatalkan' => 'Dibatalkan',
-        ])
-                    ->default('menunggu')
-                    ->required(),
+                        'menunggu'   => 'Menunggu',
+                        'diproses'   => 'Diproses',
+                        'selesai'    => 'Selesai',
+                        'dibatalkan' => 'Dibatalkan',
+                    ])
+                    ->required()
+                    ->default('menunggu'),
                 DatePicker::make('tanggal_pesanan')
-                    ->required(),
+                    ->required()
+                    ->default(now()),
             ]);
     }
 }

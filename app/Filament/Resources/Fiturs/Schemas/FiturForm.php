@@ -13,9 +13,10 @@ class FiturForm
         return $schema
             ->components([
                 TextInput::make('nama_fitur')
-                    ->required(),
+                    ->required()
+                    ->maxLength(255),
                 Textarea::make('deskripsi_fitur')
-                    ->default(null)
+                    ->required()
                     ->columnSpanFull(),
             ]);
     }

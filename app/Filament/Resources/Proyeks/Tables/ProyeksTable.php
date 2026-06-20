@@ -2,9 +2,6 @@
 
 namespace App\Filament\Resources\Proyeks\Tables;
 
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -14,36 +11,24 @@ class ProyeksTable
     {
         return $table
             ->columns([
-                TextColumn::make('id_pesanan')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('id_pekerja')
-                    ->numeric()
-                    ->sortable(),
+                TextColumn::make('pesanan.id_pesanan')
+                    ->label('ID Pesanan')
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('pekerja.name')
+                    ->label('Pekerja')
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('tautan_repositori')
                     ->searchable(),
                 TextColumn::make('persentase_progres')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->suffix('%'),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-            ])
-            ->filters([
-                //
-            ])
-            ->recordActions([
-                EditAction::make(),
-            ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
             ]);
     }
 }

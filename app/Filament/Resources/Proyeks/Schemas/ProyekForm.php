@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Proyeks\Schemas;
 
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\Select;
 use Filament\Schemas\Schema;
 
 class ProyekForm
@@ -12,21 +13,28 @@ class ProyekForm
     {
         return $schema
             ->components([
-                TextInput::make('id_pesanan')
+                Select::make('id_pesanan')
+                    ->relationship('pesanan', 'id_pesanan')
                     ->required()
-                    ->numeric(),
-                TextInput::make('id_pekerja')
-                    ->numeric()
-                    ->default(null),
+                    ->searchable(),
+                Select::make('id_pekerja')
+                    ->relationship('pekerja', 'name')
+                    ->required()
+                    ->searchable(),
                 TextInput::make('tautan_repositori')
+                    ->url()
+                    ->maxLength(255)
                     ->default(null),
                 Textarea::make('deskripsi_progres')
-                    ->default(null)
-                    ->columnSpanFull(),
+                    ->columnSpanFull()
+                    ->default(null),
                 TextInput::make('persentase_progres')
                     ->required()
                     ->numeric()
-                    ->default(0),
+                    ->minValue(0)
+                    ->maxValue(100)
+                    ->default(0)
+                    ->suffix('%'),
             ]);
     }
 }

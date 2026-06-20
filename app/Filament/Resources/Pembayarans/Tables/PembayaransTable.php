@@ -2,11 +2,8 @@
 
 namespace App\Filament\Resources\Pembayarans\Tables;
 
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\EditAction;
-use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Table;
 
 class PembayaransTable
@@ -15,37 +12,22 @@ class PembayaransTable
     {
         return $table
             ->columns([
-                TextColumn::make('id_pesanan')
-                    ->numeric()
-                    ->sortable(),
+                TextColumn::make('pesanan.id_pesanan')
+                    ->label('ID Pesanan')
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('jumlah_bayar')
-                    ->numeric()
+                    ->money('idr')
                     ->sortable(),
                 TextColumn::make('metode_pembayaran')
                     ->searchable(),
-                TextColumn::make('bukti_pembayaran')
-                    ->searchable(),
                 IconColumn::make('apakah_diverifikasi')
-                    ->boolean(),
+                    ->boolean()
+                    ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-            ])
-            ->filters([
-                //
-            ])
-            ->recordActions([
-                EditAction::make(),
-            ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
             ]);
     }
 }

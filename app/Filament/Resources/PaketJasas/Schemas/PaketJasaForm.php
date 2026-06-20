@@ -13,16 +13,19 @@ class PaketJasaForm
         return $schema
             ->components([
                 TextInput::make('nama_paket')
-                    ->required(),
+                    ->required()
+                    ->maxLength(255),
                 Textarea::make('deskripsi_paket')
                     ->required()
                     ->columnSpanFull(),
                 TextInput::make('harga')
                     ->required()
-                    ->numeric(),
+                    ->numeric()
+                    ->prefix('Rp'),
                 TextInput::make('estimasi_hari')
                     ->required()
-                    ->numeric(),
+                    ->numeric()
+                    ->suffix('Hari'),
             ]);
     }
 }

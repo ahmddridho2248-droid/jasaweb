@@ -2,9 +2,6 @@
 
 namespace App\Filament\Resources\PaketJasas\Tables;
 
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -15,32 +12,19 @@ class PaketJasasTable
         return $table
             ->columns([
                 TextColumn::make('nama_paket')
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('harga')
-                    ->numeric()
+                    ->money('idr')
                     ->sortable(),
                 TextColumn::make('estimasi_hari')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->suffix(' Hari'),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-            ])
-            ->filters([
-                //
-            ])
-            ->recordActions([
-                EditAction::make(),
-            ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
             ]);
     }
 }
