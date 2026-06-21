@@ -5,8 +5,9 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\PaketJasa;
 use App\Models\Pesanan;
+use Illuminate\Http\Request;
 
-class LandingPage extends Component
+class OrderForm extends Component
 {
     public $nama_klien = '';
     public $id_paket = null;
@@ -15,6 +16,15 @@ class LandingPage extends Component
     
     public $successMessage = '';
 
+    protected $queryString = [
+        'id_paket' => ['except' => '', 'as' => 'package']
+    ];
+
+    public function mount()
+    {
+        // Parameter 'package' from URL is bound to 'id_paket' via queryString
+    }
+
     protected $rules = [
         'nama_klien' => 'required|string|max:255',
         'id_paket' => 'required|exists:paket_jasa,id_paket_jasa',
@@ -22,16 +32,11 @@ class LandingPage extends Component
         'deskripsi_kebutuhan' => 'required|string',
     ];
 
-    public function selectPaket($id)
-    {
-        $this->id_paket = $id;
-    }
-
     public function submit()
     {
         $this->validate();
 
-        Pesanan::create([
+        $pesanan = Pesanan::create([
             'nama_klien' => $this->nama_klien,
             'id_paket' => $this->id_paket,
             'permintaan_nama_domain' => $this->permintaan_nama_domain,
@@ -40,13 +45,12 @@ class LandingPage extends Component
             'tanggal_pesanan' => now(),
         ]);
 
-        $this->reset(['nama_klien', 'id_paket', 'permintaan_nama_domain', 'deskripsi_kebutuhan']);
-        $this->successMessage = 'Pesanan Anda berhasil dikirim! Tim kami akan segera menghubungi Anda.';
+        return redirect()->route('order.success', ['id' => $pesanan->id_pesanan]);
     }
 
     public function render()
     {
         $paketJasa = PaketJasa::all();
-        return view('livewire.landing-page', compact('paketJasa'))->layout('components.layouts.app');
+        return view('livewire.order-form', compact('paketJasa'))->layout('components.layouts.app');
     }
 }
