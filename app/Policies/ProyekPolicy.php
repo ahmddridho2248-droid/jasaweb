@@ -13,7 +13,7 @@ class ProyekPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,7 +21,7 @@ class ProyekPolicy
      */
     public function view(User $user, Proyek $proyek): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -29,7 +29,7 @@ class ProyekPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -37,7 +37,7 @@ class ProyekPolicy
      */
     public function update(User $user, Proyek $proyek): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -45,7 +45,7 @@ class ProyekPolicy
      */
     public function delete(User $user, Proyek $proyek): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class ProyekPolicy
      */
     public function restore(User $user, Proyek $proyek): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -61,6 +61,6 @@ class ProyekPolicy
      */
     public function forceDelete(User $user, Proyek $proyek): bool
     {
-        return false;
+        return true;
     }
 }
