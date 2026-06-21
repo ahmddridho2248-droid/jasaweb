@@ -11,6 +11,10 @@ class PesanansTable
     {
         return $table
             ->columns([
+                TextColumn::make('id_pesanan')
+                    ->label('ID Pesanan')
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('user.name')
                     ->label('Klien')
                     ->sortable()
