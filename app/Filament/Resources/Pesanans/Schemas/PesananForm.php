@@ -14,11 +14,10 @@ class PesananForm
     {
         return $schema
             ->components([
-                Select::make('user_id')
-                    ->relationship('user', 'name')
+                TextInput::make('nama_klien')
+                    ->label('Nama Klien')
                     ->required()
-                    ->searchable()
-                    ->preload(),
+                    ->maxLength(255),
                 Select::make('id_paket')
                     ->relationship('paketJasa', 'nama_paket')
                     ->required()

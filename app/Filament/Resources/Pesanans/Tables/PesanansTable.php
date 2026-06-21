@@ -15,8 +15,8 @@ class PesanansTable
                     ->label('ID Pesanan')
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('user.name')
-                    ->label('Klien')
+                TextColumn::make('nama_klien')
+                    ->label('Nama Klien')
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('paketJasa.nama_paket')

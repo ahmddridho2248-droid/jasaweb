@@ -11,7 +11,7 @@ class Pesanan extends Model
     
     protected $table = 'pesanan';
     protected $primaryKey = 'id_pesanan';
-    protected $fillable = ['user_id', 'id_paket', 'permintaan_nama_domain', 'deskripsi_kebutuhan', 'status_pesanan', 'tanggal_pesanan'];
+    protected $fillable = ['nama_klien', 'user_id', 'id_paket', 'permintaan_nama_domain', 'deskripsi_kebutuhan', 'status_pesanan', 'tanggal_pesanan'];
 
     public function user()
     {
